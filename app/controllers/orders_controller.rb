@@ -28,6 +28,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
+        @order.delay.cook
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
